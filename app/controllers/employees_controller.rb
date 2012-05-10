@@ -120,6 +120,7 @@ class EmployeesController < ApplicationController
   end
   
   def get_child
-  	@childs	= Employee.where(:report_to => aEmployee.position)  	
+  	@childs	= Employee.where(:report_to => params[:position]) 
+  	render :layout => false 	
   end
 end
