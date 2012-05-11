@@ -6,6 +6,7 @@ class EmployeesController < ApplicationController
   # GET /employees.json
   def index    
     @employees = Employee.all
+    @root_node = Employee.all.first
 		#Employee.report(@employees)
     respond_to do |format|
       format.html # index.html.erb

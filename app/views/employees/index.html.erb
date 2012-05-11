@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<%= javascript_include_tag('jquery.tree','jquery.treecheckbox','jquery.treecollapse','jquery.treeselect')%>
-<%= stylesheet_link_tag('jquery.tree','jquery-ui')%>
+<%= javascript_include_tag('jquery.tree','jquery.treecheckbox','jquery.treecollapse','jquery.treeselect','jquery.treeview')%>
+<%= stylesheet_link_tag('jquery.tree','jquery-ui','jquery.treeview.css')%>
 <script type="text/javascript">
   $(document).ready(function() {
       $( "#accordion" ).accordion({
@@ -37,117 +37,41 @@
           }
       });
   </script>
+  <!--
   <div id="example-3 div">
-<!--    
-  	<ul>   
-  	  <% aFlag = 0 %> 		
-			<% @employees.each do |aEmployee| %>
-				<% aFlag +=1 %>									
-				<% if aEmployee.report_to == 0 %>
-					<li class="collapsed"><input type="checkbox"><span><b><%= aEmployee.first_name %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>							
-					<% Employee.where(:report_to => aEmployee.position).each do | eachReportor| %>
-						<ul>
-							<li class="collapsed"><input type="checkbox"><span><b><%= eachReportor.first_name %> <%= eachReportor.last_name %>&nbsp;(<%= eachReportor.position_title %>)</b></span>
-						  <% Employee.where(:report_to => eachReportor.position).each do | aEachReportor| %>
-								<ul>
-									<li class="collapsed"><input type="checkbox"><span><b><%= aEachReportor.first_name %> <%= aEachReportor.last_name %>&nbsp;(<%= aEachReportor.position_title %>)</b></span>
-									<% Employee.where(:report_to => aEachReportor.position).each do | aaEachReportor| %>
-										<ul>
-											<li class="collapsed"><input type="checkbox"><span><b><%= aaEachReportor.first_name %> <%= aaEachReportor.last_name %>&nbsp;(<%= aaEachReportor.position_title %>)</b></span>																						
-											<% Employee.where(:report_to => aaEachReportor.position).each do | aaaEachReportor| %>
-											<ul>
-												<li class="collapsed"><input type="checkbox"><span><b><%= aaaEachReportor.first_name %> <%= aaaEachReportor.last_name %>&nbsp;(<%= aaaEachReportor.position_title %>)</b></span>																						
-												<% Employee.where(:report_to => aaaEachReportor.position).each do | aaaaEachReportor| %>
-												<ul>
-													<li class="collapsed"><input type="checkbox"><span><b><%= aaaaEachReportor.first_name %> <%= aaaaEachReportor.last_name %>&nbsp;(<%= aaaaEachReportor.position_title %>)</b></span>																						
-														<% Employee.where(:report_to => aaaaEachReportor.position).each do | aaaaaEachReportor| %>
-													<ul>
-														<li class="collapsed"><input type="checkbox"><span><b><%= aaaaaEachReportor.first_name %> <%= aaaaaEachReportor.last_name %>&nbsp;(<%= aaaaaEachReportor.position_title %>)</b></span>																						
-														<% Employee.where(:report_to => aaaaaEachReportor.position).each do | aaaaaaEachReportor| %>
-														<ul>
-															<li class="collapsed"><input type="checkbox"><span><b><%= aaaaaaEachReportor.first_name %> <%= aaaaaaEachReportor.last_name %>&nbsp;(<%= aaaaaaEachReportor.position_title %>)</b></span>																						
-														<% Employee.where(:report_to => aaaaaaEachReportor.position).each do | aaaaaaaEachReportor| %>
-															<ul>
-																<li class="collapsed"><input type="checkbox"><span><b><%= aaaaaaaEachReportor.first_name %> <%= aaaaaaaEachReportor.last_name %>&nbsp;(<%= aaaaaaaEachReportor.position_title %>)</b></span>																						
-															<% Employee.where(:report_to => aaaaaaaEachReportor.position).each do | aaaaaaaaEachReportor| %>
-																<ul>
-																	<li class="collapsed"><input type="checkbox"><span><b><%= aaaaaaaaEachReportor.first_name %> <%= aaaaaaaaEachReportor.last_name %>&nbsp;(<%= aaaaaaaaEachReportor.position_title %>)</b></span>																						
-																<% Employee.where(:report_to => aaaaaaaaEachReportor.position).each do | aaaaaaaaaEachReportor| %>
-																	<ul>
-																		<li class="collapsed"><input type="checkbox"><span><b><%= aaaaaaaaaEachReportor.first_name %> <%= aaaaaaaaaEachReportor.last_name %>&nbsp;(<%= aaaaaaaaaEachReportor.position_title %>)</b></span>																						
-																	</ul>	
-																<% end %>	
-																</ul>	
-																<% end %>										
-															</ul>	
-														<% end %>
-														</ul>	
-													<% end %>
-													</ul>	
-												<% end %>
-												</ul>	
-											<% end %>
-											</ul>	
-										<% end %>
-										</ul>
-									<% end %>
-								</ul>
-							<% end %>
-						</ul>
-					<% end %>							
-				<% end %>						 
-			<% end %>  		
-    </ul>
-
-
-		<% @employees.each do |aEmployee| %>
-		<%= link_to aEmployee.first_name, "Vacant Position", :class => "parent" %>
-		<%= Employee.where(:report_to => aEmployee.position).each do | parent | %>
-		<% end %>
-		<% end %>
-   
-
-    <% @employees.each do |aEmployee| %>
-		<%= link_to aEmployee.first_name, "Vacant Position", :class => "parent" %>
-		<%= Employee.where(:report_to => aEmployee.position).each do | parent | %>
-	<% end %>
-	<% end %>
- 
--->
-<!--
-	<% @employees.each do | aEmployee | %>
-	<ul>
-		<li class="collapsed"><input type="checkbox"><%= aEmployee.first_name %>
+	<% @employees.each do |aEmployee| %>
+		<% if aEmployee.report_to == 0 %>
 			<ul>
-				<li><% Employee.where(:report_to => aEmployee.position).each do | parent | %>
-				<li class="collapsed"><input type="checkbox"><%= parent.first_name %>
-				<% end %>
-			</ul>	
+				<li class="collapsed"><input type="checkbox"><span><b><%= link_to aEmployee.first_name, "#", :class => "tree", :id => "#{aEmployee.position}" %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>				
+				<div id="childs"></div>
+			</ul>
+		<% end %>
+	<% end %>
+	<label id="loading" style="color:#DD0000;font-size:12px;padding-left:5px;"></label>
+	
+	
+	-->
+	
+	<ul id="my_tree" class="filetree">
+		<%= display_segment(@root_node) %>
 	</ul>
+	<!--
+	<% @employees.each do |aEmployee| %>
+		<% if aEmployee.report_to == 0 %>
+			<ul>
+				<li class="collapsed"><input type="checkbox"><span><b><%= link_to aEmployee.first_name, "#", :class => "tree", :id => "#{aEmployee.position}" %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>				
+				<div id="childs"></div>
+			</ul>
+		<% end %>
 	<% end %>
--->
-<% @employees.each do |aEmployee| %>
-	<% if aEmployee.report_to == 0 %>
-		<ul>
-			<li class="collapsed"><input type="checkbox"><span><b><%= link_to aEmployee.first_name, "#", :class => "tree", :id => "#{aEmployee.position}" %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>			
-			<div id="childs"></div>
-		</ul>
-	<% end %>
-<% end %>
-<label id="loading" style="color:#DD0000;font-size:12px;padding-left:5px;"></label>
+	-->
 </body>
 </html>
-
+<!--
 <script type="text/javascript">
     $(document).ready(function(){
     	$(".tree").click(function(event){      
-      	var targetId = event.target.id;
-				//$.post('/employees/get_child', 			
-				//	{position:event.target.id},
-				//	function(data) {
-				//		$("#childs").html(data);
-				//		}, 'script'
-				//);				
+      	var targetId = event.target.id;								
 				$.ajax({
 							type: "POST",
               url: '/employees/get_child',
@@ -164,8 +88,13 @@
                 $('#loading').append("...error loading...");
               }
             });
-				
     	});    		
     });
+</script>
+-->
+<script type="text/javascript">
+$(document).ready( function() {
+	$("#my_tree").treeview();
+} );
 </script>
 
