@@ -2,8 +2,8 @@ class Employee < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :position, :position_title, :report_to
   
   #validates :reportto, :uniqueness => true
-  #validates :lastname, :presence => true
-  #validates :firstname, :presence => true
+  validates :last_name, :presence => true
+  validates :first_name, :presence => true
 	
   
 

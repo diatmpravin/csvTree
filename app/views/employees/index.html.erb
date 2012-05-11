@@ -52,9 +52,12 @@
 	
 	-->
 	
-	<ul id="my_tree" class="filetree">
-		<%= display_segment(@root_node) %>
-	</ul>
+	<%# if @employees.length > 0 %>
+    <%# @employees.each do |tree| %>
+        <%#= display_comments(@employees) %>
+        <%= display_categories(@employees) %>
+    <%# end %>
+  <%# end %>
 	<!--
 	<% @employees.each do |aEmployee| %>
 		<% if aEmployee.report_to == 0 %>
@@ -91,10 +94,10 @@
     	});    		
     });
 </script>
--->
+
 <script type="text/javascript">
 $(document).ready( function() {
 	$("#my_tree").treeview();
 } );
 </script>
-
+-->

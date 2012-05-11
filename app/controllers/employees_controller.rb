@@ -1,11 +1,12 @@
 require 'csv'
 class EmployeesController < ApplicationController
 
-	before_filter :authenticate_user!
+	#before_filter :authenticate_user!
   # GET /employees
   # GET /employees.json
   def index    
     @employees = Employee.all
+    #raise @employees.inspect
     @root_node = Employee.all.first
 		#Employee.report(@employees)
     respond_to do |format|

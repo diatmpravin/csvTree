@@ -13,21 +13,24 @@
 
 ActiveRecord::Schema.define(:version => 20120430043130) do
 
-  create_table "categories", :force => true do |t|
-    t.string  "name",     :limit => 37, :null => false
-    t.integer "parentid"
-  end
-
-  add_index "categories", ["parentid"], :name => "parentid_fk"
-
   create_table "employees", :force => true do |t|
-    t.string   "first_name",     :default => "Vacant"
-    t.string   "last_name",      :default => "Position"
+    t.string   "first_name",     :default => "Vacant",   :null => false
+    t.string   "last_name",      :default => "Position", :null => false
     t.integer  "position"
     t.string   "position_title"
     t.integer  "report_to"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "imports", :force => true do |t|
+    t.integer  "position"
+    t.integer  "reportto"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.text     "positiontitle"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|
