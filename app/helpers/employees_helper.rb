@@ -1,21 +1,10 @@
 module EmployeesHelper
 
-	#def display_comments(tree)
-  #  to_render = ""
-  #  to_render << render({:partial => 'comment', :locals => {:body => tree.first_name}})
-  #  @childs = Employee.where(:report_to => tree.position)
-    #raise @childs.inspect
-  #  @childs.each do |child|
-  #     to_render << display_comments(child)
-  #  end
-  #  return to_render.html_safe
-  #end
-  
   def display_categories(categories)
    	ret = "<ul>"
     for category in categories
       if category.report_to == 0
-	      ret += "<li>"
+	      ret += "<li class='collapsed'>"
 	      ret += "<input type='checkbox'>"
 	      ret += category.first_name
 	      ret += " "
@@ -38,7 +27,7 @@ module EmployeesHelper
       @childs.each { |subcat|       
         @childs1 = Employee.where(:report_to => subcat.position)
         if @childs1.size > 0
-          ret += '<li>'
+          ret += "<li class='collapsed'>"
           ret += "<input type='checkbox'>"
           ret += subcat.first_name
           ret += " "
@@ -49,7 +38,7 @@ module EmployeesHelper
           ret += find_all_subcategories(subcat)
           ret += '</li>'
         else
-          ret += '<li>'          
+          ret += "<li class='collapsed'>"          
           ret += "<input type='checkbox'>"
           ret += subcat.first_name
           ret += " "

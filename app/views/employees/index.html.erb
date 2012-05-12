@@ -37,68 +37,11 @@
           }
       });
   </script>
-  <!--
-  <div id="example-3 div">
-	<% @employees.each do |aEmployee| %>
-		<% if aEmployee.report_to == 0 %>
-			<ul>
-				<li class="collapsed"><input type="checkbox"><span><b><%= link_to aEmployee.first_name, "#", :class => "tree", :id => "#{aEmployee.position}" %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>				
-				<div id="childs"></div>
-			</ul>
-		<% end %>
-	<% end %>
-	<label id="loading" style="color:#DD0000;font-size:12px;padding-left:5px;"></label>
-	
-	
-	-->
+  
 	<div id="example-3 div">
-	<%# if @employees.length > 0 %>
-    <%# @employees.each do |tree| %>
-        <%#= display_comments(@employees) %>
-        <%= display_categories(@employees) %>
-    <%# end %>
-  <%# end %>
+    <%= display_categories(@employees) %>
   </div>
-	<!--
-	<% @employees.each do |aEmployee| %>
-		<% if aEmployee.report_to == 0 %>
-			<ul>
-				<li class="collapsed"><input type="checkbox"><span><b><%= link_to aEmployee.first_name, "#", :class => "tree", :id => "#{aEmployee.position}" %> <%= aEmployee.last_name %>&nbsp;(<%= aEmployee.position_title %>)</b></span>				
-				<div id="childs"></div>
-			</ul>
-		<% end %>
-	<% end %>
-	-->
+	
 </body>
 </html>
-<!--
-<script type="text/javascript">
-    $(document).ready(function(){
-    	$(".tree").click(function(event){      
-      	var targetId = event.target.id;								
-				$.ajax({
-							type: "POST",
-              url: '/employees/get_child',
-              data: { position: targetId},              
-              cache: false,
-              beforeSend: function( ) {
-                $('#loading').append("loading...");
-              },
-              success: function(html){
-                $('#loading').empty();
-                $('#childs').append(html); 
-               },
-              error: function( ) {
-                $('#loading').append("...error loading...");
-              }
-            });
-    	});    		
-    });
-</script>
 
-<script type="text/javascript">
-$(document).ready( function() {
-	$("#my_tree").treeview();
-} );
-</script>
--->
