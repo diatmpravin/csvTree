@@ -1,6 +1,8 @@
 require 'csv'
 class EmployeesController < ApplicationController
-
+	
+	layout "application"
+	
 	before_filter :authenticate_user!
   # GET /employees
   # GET /employees.json
