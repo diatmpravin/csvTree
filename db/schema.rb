@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20120430043130) do
 
   create_table "employees", :force => true do |t|
-    t.string   "first_name",     :default => "Vacant",   :null => false
-    t.string   "last_name",      :default => "Position", :null => false
+    t.string   "first_name",     :default => "Vacant"
+    t.string   "last_name",      :default => "Position"
     t.integer  "position"
     t.string   "position_title"
     t.integer  "report_to"

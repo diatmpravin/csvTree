@@ -16,9 +16,13 @@ module EmployeesHelper
     for category in categories
       if category.report_to == 0
 	      ret += "<li>"
+	      ret += "<input type='checkbox'>"
 	      ret += category.first_name
+	      ret += " "
 	      ret += category.last_name 
-	      ret += ( category.position_title ) 
+	      ret += "("
+	      ret += category.position_title 
+	      ret += ")"
 	      ret += find_all_subcategories(category)
 	      ret += "</li>"
       end
@@ -31,20 +35,28 @@ module EmployeesHelper
     @childs = Employee.where(:report_to => category.position)
     if @childs.size > 0
       ret = '<ul>'
-      @childs.each { |subcat| 
+      @childs.each { |subcat|       
         @childs1 = Employee.where(:report_to => subcat.position)
         if @childs1.size > 0
           ret += '<li>'
+          ret += "<input type='checkbox'>"
           ret += subcat.first_name
+          ret += " "
           ret += subcat.last_name 
-	        ret += ( subcat.position_title )
+	        ret += "("
+	        ret += subcat.position_title
+          ret += ")"
           ret += find_all_subcategories(subcat)
           ret += '</li>'
         else
-          ret += '<li>'
+          ret += '<li>'          
+          ret += "<input type='checkbox'>"
           ret += subcat.first_name
-          ret += subcat.last_name 
-	        ret += ( subcat.position_title ) 
+          ret += " "
+          ret += subcat.last_name
+          ret += "(" 
+	        ret += subcat.position_title 
+          ret += ")"
           ret += '</li>'
         end
         }
